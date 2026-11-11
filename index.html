@@ -282,7 +282,7 @@ function renderHoy(){
   if(!todo) $("bEmpezar").onclick=function(){ est.verDia=d.n; save(); renderDia(d); go("dia"); };
   else $("bReiniciar").onclick=function(){ if(confirm("¿Borrar el progreso de "+CFG.nombre+" y arrancar de nuevo? Los tests quedan guardados.")){ est.hechos={}; est.ej={}; est.doce={}; save(); renderHoy(); } };
   $("bCambiar").onclick=function(){ renderPerfil(); };
-  $("s-hoy").querySelectorAll(".grid button[data-dia]").forEach(function(b){ b.onclick=function(){ var x=D.dias[+b.dataset.dia-1]; renderDia(x); go("dia"); } });
+  $("s-hoy").querySelectorAll(".grid button[data-dia]").forEach(function(b){ b.onclick=function(){ var x=D.dias[+b.dataset.dia-CFG.ini]; renderDia(x); go("dia"); } });
 }
 function semanaStrip(d){
   var ds=D.dias.filter(function(x){return x.semana===d.semana});
@@ -405,7 +405,7 @@ function enganchar(d){
 // --- Plan ---
 function renderPlan(){
   var hoy=diaHoy().n, html='<div class="top"><span class="marca">TU PLAN</span><span class="pill">'+hechos()+' de '+D.dias.length+' hechos</span></div>';
-  [1,2,3].forEach(function(w){
+  D.dias.map(function(d){return d.semana}).filter(function(w,i,a){return a.indexOf(w)===i}).forEach(function(w){
     var ds=D.dias.filter(function(d){return d.semana===w});
     html+='<div class="card"><div class="etq">Semana '+w+'</div><h3 style="margin:4px 0 6px">'+h(ds[0].semanaTitulo)+'</h3>'+
       '<div class="grid">'+ds.map(function(d){return '<button data-dia="'+d.n+'" class="'+(est.hechos[d.n]?"hecho":"")+(d.n===hoy?" hoy":"")+'">'+d.n+'</button>'}).join("")+'</div>'+
@@ -413,7 +413,7 @@ function renderPlan(){
   });
   html+='<div class="card"><h3>'+h(CFG.despuesT)+'</h3><p class="sub" style="margin-top:8px">'+h(D.despues)+'</p></div>';
   $("s-plan").innerHTML=html;
-  $("s-plan").addEventListener("click",function(e){ var b=e.target.closest("button[data-dia]"); if(!b) return; var d=D.dias[+b.dataset.dia-1]; renderDia(d); go("dia"); });
+  $("s-plan").addEventListener("click",function(e){ var b=e.target.closest("button[data-dia]"); if(!b) return; var d=D.dias[+b.dataset.dia-CFG.ini]; renderDia(d); go("dia"); });
 }
 
 // --- Tests ---
