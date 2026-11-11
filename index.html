@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1c1d20">
+<title>Nivel 2 · Fuerza en Casa 50+</title>
+<meta name="description" content="Reto de 21 días de fuerza en casa para mayores de 50. Sin equipo, en tres niveles.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Inter:wght@400;600;700&display=swap">
+<style>
+:root{
+ --bg:#1c1d20; --card:#26282d; --card2:#2b2d32; --line:#33363c; --ink:#f3efe6; --mute:#a9a59c;
+ --amb:#f0a63a; --amb2:#ffc46b; --ok:#7ad38f; --bad:#ff8a7a;
+ --disp:"Bricolage Grotesque",Inter,system-ui,sans-serif; --ui:Inter,system-ui,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--ui);font-size:18px;line-height:1.45;-webkit-font-smoothing:antialiased}
+.app{max-width:520px;margin:0 auto;padding:14px 16px calc(92px + env(safe-area-inset-bottom))}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+h1,h2,h3{font-family:var(--disp);font-weight:800;line-height:1.12;margin:0}
+h1{font-size:28px}h2{font-size:24px}h3{font-size:20px}
+p{margin:0}
+.scr{display:none}.scr.on{display:block;animation:in .22s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px}
+.marca{font-family:var(--disp);font-weight:800;color:var(--amb);font-size:18px;letter-spacing:.01em}
+.pill{font-size:15px;font-weight:700;padding:7px 13px;border-radius:99px;background:var(--card2);color:var(--amb)}
+.barra{height:10px;border-radius:99px;background:var(--card2);overflow:hidden;margin:4px 0 16px}
+.barra i{display:block;height:100%;background:var(--amb);border-radius:99px;transition:width .4s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-bottom:12px}
+.card.hecha{border-color:#3f6a4a;background:#232a25}
+.etq{font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--mute);font-weight:700}
+.sub{color:var(--mute);font-size:16px}
+.ink{color:var(--ink)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:58px;padding:14px 18px;border-radius:16px;background:var(--amb);color:#1c1d20;font-weight:800;font-size:19px;text-align:center}
+.btn:active{transform:scale(.99)}
+.btn.sec{background:var(--card2);color:var(--ink);border:1px solid var(--line)}
+.btn.ok{background:var(--ok);color:#102015}
+.btn.chica{min-height:46px;font-size:16px;width:auto;padding:10px 16px}
+.btn[disabled]{opacity:.5}
+.fila{display:flex;gap:10px}
+.fila>*{flex:1}
+.nivel{display:flex;gap:6px;margin:12px 0 4px}
+.nivel button{flex:1;text-align:center;font-size:14px;padding:10px 4px;border-radius:10px;background:var(--card2);color:var(--mute);font-weight:700;border:1px solid var(--line)}
+.nivel button.on{background:var(--amb);color:#1c1d20;border-color:var(--amb)}
+.nivel button.off{opacity:.35}
+.ej{display:flex;gap:12px;align-items:flex-start}
+.ico{width:54px;height:54px;border-radius:14px;background:var(--line);display:grid;place-items:center;flex:none;font-size:26px}
+.reps{font-weight:800;margin-top:8px;color:var(--amb2)}
+.pasos{margin:10px 0 0;padding-left:0;list-style:none;counter-reset:p}
+.pasos li{position:relative;padding-left:38px;margin:8px 0;font-size:17px}
+.pasos li::before{counter-increment:p;content:counter(p);position:absolute;left:0;top:1px;width:28px;height:28px;border-radius:50%;background:var(--amb);color:#1c1d20;font-weight:800;display:grid;place-items:center;font-size:15px}
+.err{margin-top:10px;padding:10px 12px;border-radius:12px;background:var(--card2);font-size:15px;color:var(--mute)}
+.err b{color:var(--ink)}
+.chk{display:flex;align-items:center;gap:12px;min-height:54px;width:100%;padding:10px 12px;border-radius:14px;background:var(--card2);border:1px solid var(--line);text-align:left;font-weight:700;font-size:16px}
+.chk i{width:28px;height:28px;border-radius:8px;border:2px solid var(--mute);display:grid;place-items:center;flex:none;font-style:normal}
+.chk.on{border-color:var(--ok)}.chk.on i{background:var(--ok);border-color:var(--ok);color:#102015}
+.timer{font-family:var(--disp);font-weight:800;font-size:54px;text-align:center;color:var(--amb);margin:6px 0;font-variant-numeric:tabular-nums}
+.lista{margin:0;padding-left:0;list-style:none}
+.lista li{padding:12px 0;border-bottom:1px solid var(--line);font-size:17px}
+.lista li:last-child{border:0}
+.menu{position:fixed;left:0;right:0;bottom:0;background:#1c1d20f2;border-top:1px solid var(--line);backdrop-filter:blur(8px);padding:8px 8px calc(8px + env(safe-area-inset-bottom))}
+.menu div{max-width:520px;margin:0 auto;display:flex}
+.menu button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 2px;font-size:12px;font-weight:700;color:var(--mute);border-radius:12px}
+.menu button span{font-size:22px;line-height:1}
+.menu button.on{color:var(--amb)}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0 14px}
+.grid button{aspect-ratio:1;border-radius:10px;background:var(--card2);border:1px solid var(--line);font-weight:800;font-size:15px;color:var(--mute)}
+.grid button.hecho{background:var(--ok);color:#102015;border-color:var(--ok)}
+.grid button.hoy{border-color:var(--amb);color:var(--amb)}
+.aviso{border-left:4px solid var(--amb);padding:10px 14px;background:var(--card2);border-radius:0 12px 12px 0;font-size:16px;margin-bottom:12px}
+.num{width:100%;font:inherit;font-size:24px;font-weight:800;text-align:center;padding:12px;border-radius:12px;border:1px solid var(--line);background:#1c1d20;color:var(--ink)}
+.cmp{display:grid;grid-template-columns:1fr auto auto auto;gap:8px 12px;align-items:center;font-size:16px}
+.cmp b{font-size:22px;font-family:var(--disp)}
+.cmp .d{color:var(--ok);font-weight:800}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 16px;margin-bottom:10px}
+summary{cursor:pointer;padding:14px 0;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--amb);font-weight:800;font-size:22px;line-height:1}
+details[open] summary::after{content:"–"}
+details p,details ol{padding-bottom:14px;color:var(--ink);font-size:16px;margin:0}
+details ol{padding-left:22px}
+.cierre{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--amb2);text-align:center;padding:10px 6px}
+.opc{display:grid;gap:10px}
+.opc button{min-height:60px;padding:12px 16px;border-radius:14px;background:var(--card2);border:1px solid var(--line);font-weight:700;font-size:17px;text-align:left}
+.opc button.on{border-color:var(--amb);background:#3a301e}
+.sr{position:absolute;left:-9999px}
+.link{color:var(--amb);font-weight:700;text-decoration:underline}
+.ej .ico{width:44px;height:44px;flex:0 0 44px;border-radius:12px;display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:22px;color:var(--amb);border:1px solid var(--line);background:#1c1d20}
+.ilus{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:928/1152;object-fit:cover;border-radius:16px;margin:12px auto 4px;background:#f3ead8}
+.mini{width:100%;max-width:220px;border-radius:12px;margin:6px 0;display:block}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- Bienvenida / perfil -->
+<section class="scr" id="s-perfil">
+  <div class="top"><span class="marca" id="marca1">FUERZA EN CASA 50+</span></div>
+  <h1 style="margin:14px 0 8px">Armemos tu plan</h1>
+  <p class="sub" style="margin-bottom:20px">Dos preguntas. Después, el reto se acomoda solo.</p>
+  <div class="card">
+    <div class="etq">1 de 2</div>
+    <h3 style="margin:6px 0 12px">¿Te molestan las rodillas o la espalda?</h3>
+    <div class="opc" id="opLimit"></div>
+  </div>
+  <div class="card">
+    <div class="etq">2 de 2</div>
+    <h3 style="margin:6px 0 12px">¿Tienes 65 años o más?</h3>
+    <div class="opc" id="opEdad"></div>
+    <p class="sub" style="margin-top:10px">Si sí, activamos el modo suave: dos series en vez de tres, y empiezas en Nivel Silla.</p>
+  </div>
+  <button class="btn" id="bPerfil">Ver mi plan</button>
+  <p class="sub" style="margin-top:14px;font-size:15px">Esto no es un tratamiento. Si tuviste una cirugía reciente, problemas de corazón, mareos o un dolor agudo, consulta a tu médico antes de arrancar.</p>
+</section>
+
+<!-- Hoy -->
+<section class="scr" id="s-hoy"></section>
+
+<!-- Un día abierto -->
+<section class="scr" id="s-dia"></section>
+
+<!-- Plan -->
+<section class="scr" id="s-plan"></section>
+
+<!-- Tests -->
+<section class="scr" id="s-tests"></section>
+
+<!-- Ayuda -->
+<section class="scr" id="s-ayuda"></section>
+
+</div>
+
+<nav class="menu" id="menu" hidden>
+  <div>
+    <button data-go="hoy"><span>💪</span>Hoy</button>
+    <button data-go="plan"><span>📅</span>Plan</button>
+    <button data-go="tests"><span>📈</span>Mis tests</button>
+    <button data-go="ayuda"><span>❓</span>Ayuda</button>
+  </div>
+</nav>
+
+<style>
+#gate{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px}
+#gate.off{display:none}
+.gbox{width:100%;max-width:420px;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px 22px;text-align:center}
+.gbox h1{margin:0;font-family:var(--disp);font-weight:800;font-size:30px;line-height:1.1;color:var(--amb)}
+.gbox p{margin:12px 0 18px;font-size:17px;line-height:1.45}
+.gbox input{width:100%;font:inherit;font-size:20px;font-weight:700;text-align:center;padding:16px;border:1px solid var(--line);border-radius:14px;background:#1c1d20;color:var(--ink);outline:none}
+.gbox input:focus{box-shadow:0 0 0 3px rgba(240,166,58,.45)}
+.gbox .btn{margin-top:12px}
+.gerr{min-height:22px;margin-top:10px;color:#ff8a7a;font-weight:700;font-size:15px}
+.gbox small{display:block;margin-top:10px;font-size:14px;opacity:.7}
+</style>
+<div id="gate">
+ <form class="gbox" id="gForm" autocomplete="off">
+  <div style="font-size:42px;line-height:1">🔒</div>
+  <h1>Fuerza en Casa 50+ · Nivel 2</h1>
+  <p>Escribe la clave que llegó en el correo de tu compra.</p>
+  <input id="gPass" type="text" inputmode="text" autocapitalize="none" spellcheck="false" placeholder="Tu clave" aria-label="Clave">
+  <button class="btn" type="submit" id="gBtn">Entrar</button>
+  <div class="gerr" id="gErr" role="alert"></div>
+  <small>Se pide una sola vez en cada teléfono.</small>
+ </form>
+</div>
+<script>
+(function(){
+var KEYP="rf50n2-clave-tu";
+var S=crypto&&crypto.subtle;
+function err(t){document.getElementById("gErr").textContent=t}
+async function derive(pass,salt){
+  var base=await S.importKey("raw",new TextEncoder().encode(pass),"PBKDF2",false,["deriveKey"]);
+  return S.deriveKey({name:"PBKDF2",salt:salt,iterations:250000,hash:"SHA-256"},base,{name:"AES-GCM",length:256},false,["decrypt"]);
+}
+async function unlock(pass){
+  var r=await fetch("d.bin",{cache:"no-cache"}); var all=new Uint8Array(await r.arrayBuffer());
+  var k=await derive(pass,all.slice(0,16));
+  var plain=await S.decrypt({name:"AES-GCM",iv:all.slice(16,28)},k,all.slice(28));
+  window.DATA=JSON.parse(new TextDecoder().decode(plain));
+  try{localStorage.setItem(KEYP,pass)}catch(e){}
+  (function go(){ if(typeof window.START==="function"){ window.START(); document.getElementById("gate").classList.add("off"); } else setTimeout(go,30); })();
+}
+document.getElementById("gForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  var p=document.getElementById("gPass").value.trim().toLowerCase();
+  if(!p){err("Escribe la clave.");return}
+  if(!S){err("Este navegador no puede abrir la app. Prueba con Chrome o Safari actualizados.");return}
+  var b=document.getElementById("gBtn"); b.disabled=true; b.textContent="Abriendo…"; err("");
+  unlock(p).catch(function(){ err("Esa clave no es. Revisa el correo de tu compra."); try{localStorage.removeItem(KEYP)}catch(e){} }).finally(function(){ b.disabled=false; b.textContent="Entrar"; });
+});
+var saved=null; try{saved=localStorage.getItem(KEYP)}catch(e){}
+if(saved&&S){ unlock(saved).catch(function(){ try{localStorage.removeItem(KEYP)}catch(e){} }); }
+})();
+</script>
+
+<script>
+window.START=function(){
+var D=window.DATA, $=function(id){return document.getElementById(id)};
+var CFG=Object.assign({ini:1,fin:21,marca:"FUERZA EN CASA 50+",terminaste:"Terminaste los 21 días",nombre:"los 21 días",t0:"Día 0 · tu punto de partida",t1:"Día 21 · comparas",c0:"Día 0",c1:"Día 21",despuesT:"Después del Día 21",testsNota:"Los números se cargan en el Día 1 y en el Día 21 del plan. Si quieres repetirlos cualquier otro día, anótalos en el Día 21: se sobreescriben."},D.cfg||{});
+var KEY="rf50n2-estado-tu";
+var NIV=["Silla","Pared","Piso"];
+var IMGN=["silla","pared","piso"];
+function ilus(m,n){return 'img/m'+m+'-'+IMGN[n]+'.jpg'}
+var GRUPO={fuerzaA:[1,2,5],fuerzaB:[3,4,6],circuito:[1,2,3,4,5,6]};
+var VIDEOS={}; // {"1-0":"https://...", ...} se completa cuando estén los videos
+var est=load();
+
+function load(){ try{var s=JSON.parse(localStorage.getItem(KEY)); if(s) return s}catch(e){} return {perfil:null,niveles:{1:0,2:0,3:0,4:0,5:0,6:0},hechos:{},ej:{},doce:{},tests:{},verDia:null}; }
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(est))}catch(e){} }
+function h(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+// --- límites según el perfil ---
+function topeNivel(m){
+  var p=est.perfil||{};
+  if((p.limit==="rodillas"||p.limit==="ambas")&&m===6) return 1;
+  if((p.limit==="espalda"||p.limit==="ambas")&&(m===3||m===4||m===5)) return 1;
+  return 2;
+}
+function nivelDe(m){ return Math.min(est.niveles[m]||0, topeNivel(m)); }
+function seriesDe(d){
+  if(!d.series) return null;
+  var mm=d.series.match(/(\d+)\s*×\s*(\d+)/); if(!mm) return null;
+  var s=parseInt(mm[1],10), r=parseInt(mm[2],10);
+  if(est.perfil&&est.perfil.suave) s=Math.min(s,2);
+  return {s:s,r:r};
+}
+function tipoBase(d){ return d.tipo.indexOf("fuerzaA")>-1?"fuerzaA":d.tipo.indexOf("fuerzaB")>-1?"fuerzaB":d.tipo; }
+function diaHoy(){ for(var i=0;i<D.dias.length;i++){ if(!est.hechos[D.dias[i].n]) return D.dias[i]; } return D.dias[D.dias.length-1]; }
+function hechos(){ return Object.keys(est.hechos).length; }
+
+// --- navegación ---
+function go(id){
+  document.querySelectorAll(".scr").forEach(function(s){s.classList.remove("on")});
+  $("s-"+id).classList.add("on");
+  document.querySelectorAll(".menu button").forEach(function(b){b.classList.toggle("on",b.dataset.go===id||(id==="dia"&&b.dataset.go==="hoy"))});
+  window.scrollTo(0,0);
+  if(id==="hoy") renderHoy(); if(id==="plan") renderPlan(); if(id==="tests") renderTests(); if(id==="ayuda") renderAyuda();
+}
+document.querySelectorAll(".menu button").forEach(function(b){ b.addEventListener("click",function(){ go(b.dataset.go) }) });
+
+// --- perfil ---
+function renderPerfil(){
+  var q=new URLSearchParams(location.search);
+  var lim=q.get("l")||"ninguna", suave=q.get("s")==="1";
+  var ops=[["ninguna","Ninguna de las dos"],["rodillas","Las rodillas"],["espalda","La espalda baja"],["ambas","Las dos"]];
+  $("opLimit").innerHTML=ops.map(function(o){return '<button data-v="'+o[0]+'" class="'+(o[0]===lim?"on":"")+'">'+o[1]+'</button>'}).join("");
+  $("opEdad").innerHTML=[["0","No, tengo entre 50 y 64"],["1","Sí, 65 o más"]].map(function(o){return '<button data-v="'+o[0]+'" class="'+((o[0]==="1")===suave?"on":"")+'">'+o[1]+'</button>'}).join("");
+  ["opLimit","opEdad"].forEach(function(id){ $(id).addEventListener("click",function(e){ var b=e.target.closest("button"); if(!b) return; $(id).querySelectorAll("button").forEach(function(x){x.classList.remove("on")}); b.classList.add("on"); }) });
+  $("bPerfil").onclick=function(){
+    var l=$("opLimit").querySelector(".on").dataset.v, s=$("opEdad").querySelector(".on").dataset.v==="1";
+    est.perfil={limit:l,suave:s}; save(); $("menu").hidden=false; go("hoy");
+  };
+  go("perfil");
+}
+
+// --- Hoy ---
+function etiquetaPerfil(){
+  var p=est.perfil, t=[];
+  if(p.limit==="rodillas") t.push("apto rodillas"); if(p.limit==="espalda") t.push("apto espalda"); if(p.limit==="ambas") t.push("apto rodillas y espalda");
+  if(p.suave) t.push("modo suave");
+  return t.length?t.join(" · "):"plan estándar";
+}
+function renderHoy(){
+  var d=diaHoy(), n=hechos(), todo=n>=D.dias.length;
+  var sug=sugerencia();
+  $("s-hoy").innerHTML=
+   '<div class="top"><span class="marca">'+h(CFG.marca)+'</span><span class="pill">'+(todo?"Reto completo":"Día "+d.n+" de "+CFG.fin)+'</span></div>'+
+   '<div class="barra"><i style="width:'+Math.round(n/D.dias.length*100)+'%"></i></div>'+
+   (sug?'<div class="aviso">'+sug+'</div>':'')+
+   '<div class="card">'+
+     '<div class="etq">Hoy · '+h(nombreTipo(d))+(d.series?' · '+h(d.series):'')+(d.minutos?' · '+d.minutos+' min':'')+'</div>'+
+     '<h2 style="margin:6px 0 8px">'+h(d.titulo)+'</h2>'+
+     '<p class="ink">'+h(d.hoy)+'</p>'+
+     (d.nota?'<p class="sub" style="margin-top:8px">'+h(d.nota)+'</p>':'')+
+   '</div>'+
+   (todo?'':semanaStrip(d))+
+   (todo?'<div class="card"><h3>'+h(CFG.terminaste)+'</h3><p class="sub" style="margin-top:8px">'+h(D.despues)+'</p></div>'+
+         '<button class="btn sec" id="bReiniciar">Empezar el reto de nuevo</button>'
+       :'<button class="btn" id="bEmpezar">Empezar el Día '+d.n+'</button>')+
+   '<p class="sub" style="margin-top:14px;text-align:center;font-size:15px">Tu plan: '+h(etiquetaPerfil())+' · <button class="link" id="bCambiar">cambiar</button></p>';
+  if(!todo) $("bEmpezar").onclick=function(){ est.verDia=d.n; save(); renderDia(d); go("dia"); };
+  else $("bReiniciar").onclick=function(){ if(confirm("¿Borrar el progreso de "+CFG.nombre+" y arrancar de nuevo? Los tests quedan guardados.")){ est.hechos={}; est.ej={}; est.doce={}; save(); renderHoy(); } };
+  $("bCambiar").onclick=function(){ renderPerfil(); };
+  $("s-hoy").querySelectorAll(".grid button[data-dia]").forEach(function(b){ b.onclick=function(){ var x=D.dias[+b.dataset.dia-1]; renderDia(x); go("dia"); } });
+}
+function semanaStrip(d){
+  var ds=D.dias.filter(function(x){return x.semana===d.semana});
+  return '<div class="card"><div class="etq">Semana '+d.semana+' · '+h(ds[0].semanaTitulo)+'</div>'+
+    '<div class="grid" style="margin-bottom:0">'+ds.map(function(x){return '<button data-dia="'+x.n+'" class="'+(est.hechos[x.n]?"hecho":"")+(x.n===d.n?" hoy":"")+'" title="'+h(nombreTipo(x))+'">'+x.n+'</button>'}).join("")+'</div>'+
+    '<p class="sub" style="font-size:14px;margin-top:10px">Toca un día para verlo. Fuerza lunes, miércoles y viernes; el resto, movilidad y caminata.</p></div>';
+}
+function nombreTipo(d){
+  var t=tipoBase(d);
+  return {fuerzaA:"Fuerza A",fuerzaB:"Fuerza B",circuito:"Circuito",movilidad:"Movilidad",caminata:"Caminata",activo:"Descanso activo",libre:"Libre",test:"Tests"}[t]||t;
+}
+// regla de las 12: dos días seguidos con 12 limpias en un movimiento → sugerir subir
+function sugerencia(){
+  for(var m=1;m<=6;m++){
+    var l=est.doce[m]||[]; var niv=nivelDe(m);
+    if(l.length>=2 && niv<topeNivel(m) && !(est.niveles["sug"+m]===l[l.length-1])){
+      var mov=D.mov[m-1];
+      return 'Dos días seguidos con 12 limpias en <b>'+h(mov.nombre)+'</b>. Hoy prueba el Nivel '+NIV[niv+1]+'. <button class="link" onclick="window.subir('+m+')">Subir de nivel</button> · <button class="link" onclick="window.despues('+m+')">Todavía no</button>';
+    }
+  }
+  return "";
+}
+window.subir=function(m){ est.niveles[m]=Math.min(nivelDe(m)+1,topeNivel(m)); est.doce[m]=[]; save(); renderHoy(); };
+window.despues=function(m){ var l=est.doce[m]||[]; est.niveles["sug"+m]=l[l.length-1]; save(); renderHoy(); };
+
+// --- Un día ---
+function renderDia(d){
+  var t=tipoBase(d), html='<div class="top"><button class="pill" id="bVolver">← Volver</button><span class="pill">Día '+d.n+'</span></div>'+
+    '<div class="etq">'+h(nombreTipo(d))+(d.series?' · '+h(d.series):'')+'</div><h1 style="margin:4px 0 10px">'+h(d.titulo)+'</h1><p class="sub" style="margin-bottom:14px">'+h(d.hoy)+'</p>';
+  if(d.tipo.indexOf("test")===0||d.tipo==="test") html+=bloqueTests(d.n===CFG.ini?"d0":"d21");
+  if(GRUPO[t]){
+    html+=rutina("calor", d);
+    GRUPO[t].forEach(function(m){ html+=tarjetaEj(m,d) });
+    html+=rutina("estir", d);
+  }
+  if(t==="movilidad"||t==="activo") html+=rutinaMov7(d);
+  if(t==="caminata"||t==="activo") html+=bloqueCaminata(d);
+  if(t==="libre") html+='<div class="card"><p class="ink">Hoy no hay nada que hacer. Marca el día como hecho y sigue mañana.</p></div>';
+  html+='<div class="cierre">'+h(d.cierre||"")+'</div>';
+  html+='<button class="btn ok" id="bHecho">'+(est.hechos[d.n]?"Día marcado como hecho ✓":"Terminé el Día "+d.n+" ✓")+'</button>';
+  $("s-dia").innerHTML=html;
+  $("bVolver").onclick=function(){ go("hoy") };
+  $("bHecho").onclick=function(){ est.hechos[d.n]=true; save(); go("hoy"); };
+  enganchar(d);
+}
+function rutina(k,d){
+  var r=D.rutinas[k], id="r"+k+"-"+d.n;
+  return '<details><summary>'+h(r.titulo)+'</summary><ol>'+r.items.map(function(x){return '<li>'+h(x)+'</li>'}).join("")+'</ol></details>';
+}
+function textoReps(m,d){
+  var s=seriesDe(d), niv=nivelDe(m);
+  if(!s) return "";
+  if(m===5&&niv===2) return s.s+" × 15 a 30 segundos";
+  if(m===6&&niv>=1) return s.s+" × "+(d.equilibrio||15)+" s por pierna"+(niv===2?" + "+s.r+" talones":"");
+  return s.s+" series × "+s.r+" · descanso 45 s";
+}
+function tarjetaEj(m,d){
+  var mov=D.mov[m-1], niv=nivelDe(m), nv=mov.niveles[niv], tope=topeNivel(m), k=d.n+"-"+m;
+  var vid=VIDEOS[m+"-"+niv];
+  return '<div class="card'+(est.ej[k]?" hecha":"")+'" id="ej'+m+'">'+
+    '<div class="ej"><div class="ico">'+m+'</div><div style="flex:1"><div class="etq">Movimiento '+m+'</div><h3>'+h(mov.nombre)+'</h3><p class="sub">'+h(mov.para)+'</p></div></div>'+
+    '<img class="ilus" src="'+ilus(m,niv)+'" alt="'+h(mov.nombre)+', nivel '+NIV[niv]+'" loading="lazy">'+
+    '<div class="nivel">'+NIV.map(function(nn,i){return '<button data-m="'+m+'" data-n="'+i+'" class="'+(i===niv?"on":"")+(i>tope?" off":"")+'">'+nn+'</button>'}).join("")+'</div>'+
+    (tope<2?'<p class="sub" style="font-size:14px">Tu plan deja este ejercicio hasta Nivel Pared.</p>':'')+
+    '<div class="reps">'+h(textoReps(m,d))+'</div>'+
+    '<p class="ink" style="margin-top:8px;font-weight:600">'+h(nv.intro)+'</p>'+
+    '<ol class="pasos">'+nv.pasos.map(function(p){return '<li>'+h(p)+'</li>'}).join("")+'</ol>'+
+    '<div class="err"><b>Error común:</b> '+h(mov.error)+'</div>'+
+    (vid?'<a class="btn sec" style="margin-top:10px" href="'+vid+'" target="_blank" rel="noopener">▶ Ver el video (30 s)</a>':'')+
+    '<div class="fila" style="margin-top:12px"><button class="btn sec chica" data-timer="45">⏱ Descanso 45 s</button></div>'+
+    '<div class="timer" id="t'+m+'" hidden>0:45</div>'+
+    '<div style="display:grid;gap:8px;margin-top:12px">'+
+      '<button class="chk'+(est.ej[k]?" on":"")+'" data-chk="'+k+'"><i>'+(est.ej[k]?"✓":"")+'</i>Hice este ejercicio</button>'+
+      (seriesDe(d)?'<button class="chk'+(tiene12(m,d.n)?" on":"")+'" data-doce="'+m+'" data-dia="'+d.n+'"><i>'+(tiene12(m,d.n)?"✓":"")+'</i>Me salieron 12 limpias</button>':'')+
+    '</div>'+
+  '</div>';
+}
+function tiene12(m,dia){ return (est.doce[m]||[]).indexOf(dia)>-1 }
+function rutinaMov7(d){
+  var r=D.rutinas.mov7;
+  return '<div class="card"><div class="etq">7 minutos</div><h3 style="margin:6px 0 8px">'+h(r.titulo)+'</h3><p class="sub">'+h(r.intro)+'</p>'+
+    '<ol class="pasos">'+r.items.map(function(x){return '<li>'+h(x)+'</li>'}).join("")+'</ol>'+
+    '<div class="fila" style="margin-top:12px"><button class="btn sec chica" data-timer="60">⏱ Un minuto</button></div><div class="timer" id="tmov" hidden>1:00</div></div>';
+}
+function bloqueCaminata(d){
+  var min=d.minutos||10, r=D.rutinas.caminata;
+  return '<div class="card"><div class="etq">'+min+' minutos</div><h3 style="margin:6px 0 8px">Caminata</h3><p class="sub">'+h(r.intro)+'</p>'+
+    '<div class="timer" id="tcam">'+min+':00</div><div class="fila"><button class="btn" data-cam="'+min+'">▶ Empezar</button></div></div>';
+}
+function bloqueTests(k){
+  var t=est.tests[k]||{};
+  return '<div class="card"><div class="etq">'+(k==="d0"?CFG.t0:CFG.t1)+'</div><h3 style="margin:6px 0 10px">Tus tres tests</h3>'+
+    D.tests.map(function(x,i){return '<div style="margin:12px 0"><p style="font-weight:700">'+x.n+'. '+h(x.titulo)+'</p><p class="sub" style="font-size:15px;margin:4px 0 8px">'+h(x.texto)+'</p><input class="num" inputmode="numeric" pattern="[0-9]*" data-test="'+k+'" data-i="'+i+'" placeholder="0" value="'+(t[i]!=null?t[i]:"")+'"></div>'}).join("")+
+    '<p class="sub" style="font-size:15px">'+h(D.testsCierre[0]||"")+'</p></div>';
+}
+var timers={};
+function cuenta(el,seg,fin){
+  if(timers[el.id]) clearInterval(timers[el.id]);
+  el.hidden=false; var t=seg;
+  function pinta(){ var m=Math.floor(t/60), s=t%60; el.textContent=m+":"+(s<10?"0":"")+s; }
+  pinta();
+  timers[el.id]=setInterval(function(){ t--; pinta(); if(t<=0){ clearInterval(timers[el.id]); el.textContent=fin||"¡Listo!"; try{navigator.vibrate&&navigator.vibrate(200)}catch(e){} } },1000);
+}
+function enganchar(d){
+  var s=$("s-dia");
+  s.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    if(b.dataset.m){ var m=+b.dataset.m, n=+b.dataset.n; if(n>topeNivel(m)) return; est.niveles[m]=n; save(); var c=$("ej"+m); c.outerHTML=tarjetaEj(m,d); return; }
+    if(b.dataset.chk){ est.ej[b.dataset.chk]=!est.ej[b.dataset.chk]; save(); var m2=+b.dataset.chk.split("-")[1]; $("ej"+m2).outerHTML=tarjetaEj(m2,d); return; }
+    if(b.dataset.doce){ var mm=+b.dataset.doce, dia=+b.dataset.dia, l=est.doce[mm]||[]; var i=l.indexOf(dia); if(i>-1) l.splice(i,1); else { l.push(dia); l.sort(function(a,b){return a-b}); if(l.length>2) l=l.slice(-2); } est.doce[mm]=l; save(); $("ej"+mm).outerHTML=tarjetaEj(mm,d); return; }
+    if(b.dataset.timer){ var card=b.closest(".card"); cuenta(card.querySelector(".timer"),+b.dataset.timer,"¡Sigue!"); return; }
+    if(b.dataset.cam){ cuenta($("tcam"),+b.dataset.cam*60,"¡Caminata hecha!"); b.textContent="Caminando…"; b.disabled=true; return; }
+  });
+  s.addEventListener("input",function(e){
+    var i=e.target; if(!i.dataset.test) return;
+    var k=i.dataset.test; est.tests[k]=est.tests[k]||{}; est.tests[k][i.dataset.i]=i.value===""?null:parseInt(i.value,10); save();
+  });
+}
+
+// --- Plan ---
+function renderPlan(){
+  var hoy=diaHoy().n, html='<div class="top"><span class="marca">TU PLAN</span><span class="pill">'+hechos()+' de '+D.dias.length+' hechos</span></div>';
+  [1,2,3].forEach(function(w){
+    var ds=D.dias.filter(function(d){return d.semana===w});
+    html+='<div class="card"><div class="etq">Semana '+w+'</div><h3 style="margin:4px 0 6px">'+h(ds[0].semanaTitulo)+'</h3>'+
+      '<div class="grid">'+ds.map(function(d){return '<button data-dia="'+d.n+'" class="'+(est.hechos[d.n]?"hecho":"")+(d.n===hoy?" hoy":"")+'">'+d.n+'</button>'}).join("")+'</div>'+
+      '<ul class="lista">'+ds.map(function(d){return '<li><b>Día '+d.n+'</b> · '+h(nombreTipo(d))+(d.series?' '+h(d.series):'')+(d.minutos?' '+d.minutos+' min':'')+'<br><span class="sub">'+h(d.titulo)+'</span></li>'}).join("")+'</ul></div>';
+  });
+  html+='<div class="card"><h3>'+h(CFG.despuesT)+'</h3><p class="sub" style="margin-top:8px">'+h(D.despues)+'</p></div>';
+  $("s-plan").innerHTML=html;
+  $("s-plan").addEventListener("click",function(e){ var b=e.target.closest("button[data-dia]"); if(!b) return; var d=D.dias[+b.dataset.dia-1]; renderDia(d); go("dia"); });
+}
+
+// --- Tests ---
+function renderTests(){
+  var a=est.tests.d0||{}, b=est.tests.d21||{};
+  var html='<div class="top"><span class="marca">MIS TESTS</span></div>'+
+    '<div class="card"><div class="cmp"><span></span><b class="sub" style="font-size:14px">'+h(CFG.c0)+'</b><b class="sub" style="font-size:14px">'+h(CFG.c1)+'</b><b class="sub" style="font-size:14px">Dif.</b>'+
+    D.tests.map(function(t,i){ var x=a[i], y=b[i]; var dif=(x!=null&&y!=null)?(y-x):null; return '<span style="font-weight:700;font-size:15px">'+h(t.titulo)+'</span><b>'+(x!=null?x:"–")+'</b><b>'+(y!=null?y:"–")+'</b><span class="d">'+(dif==null?"":(dif>0?"+":"")+dif)+'</span>' }).join("")+
+    '</div></div>'+
+    '<div class="card"><h3>Cómo se hacen</h3><ul class="lista">'+D.tests.map(function(t){return '<li><b>'+t.n+'. '+h(t.titulo)+'</b><br><span class="sub">'+h(t.texto)+'</span></li>'}).join("")+'</ul>'+
+    '<p class="sub" style="margin-top:10px;font-size:15px">'+h(CFG.testsNota)+'</p></div>';
+  $("s-tests").innerHTML=html;
+}
+
+// --- Ayuda ---
+function renderAyuda(){
+  var html='<div class="top"><span class="marca">AYUDA</span></div>';
+  html+='<div class="card"><h3 style="margin-bottom:8px">Antes de empezar</h3>'+D.antes.map(function(x){return '<p style="margin-top:10px"><b>'+h(x.t)+'.</b> <span class="sub">'+h(x.p)+'</span></p>'}).join("")+'</div>';
+  html+='<h3 style="margin:16px 0 10px">Los 6 movimientos</h3>'+D.mov.map(function(m){return '<details><summary>'+m.n+'. '+h(m.nombre)+'</summary><img class="mini" src="'+ilus(m.n,0)+'" alt="" loading="lazy"><p><b>Para qué:</b> '+h(m.para)+'</p>'+m.niveles.map(function(n){return '<p style="margin-top:8px"><b>Nivel '+h(n.nombre)+'.</b> '+h(n.intro)+' '+n.pasos.map(function(p,i){return (i+1)+") "+h(p)}).join(" ")+'</p>'}).join("")+'<p style="margin-top:8px"><b>Error común:</b> '+h(m.error)+'</p></details>'}).join("");
+  html+='<h3 style="margin:16px 0 10px">Rutinas fijas</h3>'+["calor","estir","mov7"].map(function(k){var r=D.rutinas[k];return '<details><summary>'+h(r.titulo)+'</summary><ol>'+r.items.map(function(x){return '<li>'+h(x)+'</li>'}).join("")+'</ol></details>'}).join("")+
+    '<details><summary>'+h(D.rutinas.caminata.titulo)+'</summary><p>'+h(D.rutinas.caminata.intro)+'</p></details>';
+  html+='<h3 style="margin:16px 0 10px">Preguntas frecuentes</h3>'+D.faq.map(function(f){return '<details><summary>'+h(f.q)+'</summary><p>'+h(f.a)+'</p></details>'}).join("");
+  html+='<p class="sub" style="margin-top:18px;font-size:14px;text-align:center">Tu progreso se guarda en este teléfono. Si cambias de teléfono, empiezas de cero.</p>';
+  $("s-ayuda").innerHTML=html;
+}
+
+// arranque
+if(est.perfil){ $("menu").hidden=false; go("hoy"); } else { renderPerfil(); }
+};
+</script>
+
+</body>
+</html>
